@@ -21,7 +21,7 @@ jobs:
       with:
         cache: 'yarn'
         corepack: true
-        node-version: latest
+        node-version: '22'
     - name: Set up JDK 17
       uses: actions/setup-java@v4
       with:
@@ -48,6 +48,10 @@ jobs:
     # refreshed instead of failing on --immutable.
     - name: Install Yarn dependencies
       run: yarn install --no-immutable
+
+    # Fail early (with the real error) if the autolinking config cannot be generated.
+    - name: Verify autolinking config
+      run: npx react-native config > /tmp/autolinking.json
 
     # Configure Gradle for optimal use in GitHub Actions, including caching of downloaded dependencies.
     # See: https://github.com/gradle/actions/blob/main/setup-gradle/README.md
