@@ -50,7 +50,7 @@ const ServerDisplay = ({
           <>
             <Text style={styles.serverPlayers}>
               {'players' in ping ? ping.players.online : ping.online}/
-              {'players' in ping ? ping.players.max : ping.maxPlayers} players online | Ping:{' '}
+              {'players' in ping ? ping.players.max : ping.maxPlayers} 人在线 | 延迟:{' '}
               {ping.ping}ms
             </Text>
             <ChatToJsx
@@ -64,10 +64,10 @@ const ServerDisplay = ({
         ) : (
           <Text style={styles.serverDescription}>
             {ping === null
-              ? 'An error occurred when pinging server.'
+              ? 'Ping 服务器时发生错误。'
               : ping === false
-                ? 'No route to host!'
-                : 'Pinging...'}
+                ? '网络不可达！'
+                : '正在 Ping...'}
           </Text>
         )}
       </View>

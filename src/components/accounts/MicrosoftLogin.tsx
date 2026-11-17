@@ -66,7 +66,7 @@ const MicrosoftLogin = ({ close }: { close: () => void }): React.JSX.Element => 
       try {
         loading.current = true
         webview.current.stopLoading()
-        setHtml('<h1>Loading...</h1>')
+        setHtml('<h1>正在加载...</h1>')
         webview.current.reload()
         const suffix = newNavState.url.substring(redirectUrlPrefix.length)
         const authCode = suffix.substring(0, suffix.indexOf('&'))
@@ -89,7 +89,7 @@ const MicrosoftLogin = ({ close }: { close: () => void }): React.JSX.Element => 
         loading.current = false
         if (alreadyExists) {
           setHtml(
-            '<h1>You are already logged into this account! However, your account credentials have been updated.</h1>',
+            '<h1>你已经登录了这个账号！不过账号凭据已更新。</h1>',
           )
         } else {
           setHtml('')
@@ -98,12 +98,12 @@ const MicrosoftLogin = ({ close }: { close: () => void }): React.JSX.Element => 
       } catch (e) {
         loading.current = false
         if (e instanceof XstsError) {
-          setHtml(`<h1>Xbox Live Error (${e.XErr}): ${e.XErrMessage}</h1>`)
-        } else if (e instanceof Error && e.message === 'This user does not own Minecraft!') {
-          setHtml('<h1>You do not own Minecraft!</h1>')
+          setHtml(`<h1>Xbox Live 错误（${e.XErr}）：${e.XErrMessage}</h1>`)
+        } else if (e instanceof Error && e.message === '该用户没有购买 Minecraft！') {
+          setHtml('<h1>该账号没有购买 Minecraft！</h1>')
         } else {
           console.error(e)
-          setHtml('<h1>An unknown error occurred while logging in.</h1>')
+          setHtml('<h1>登录时发生未知错误。</h1>')
         }
       }
     }
@@ -129,7 +129,7 @@ const MicrosoftLogin = ({ close }: { close: () => void }): React.JSX.Element => 
           ]}
         >
           <Ionicons.Button name='close' onPress={handleClose}>
-            Close
+            关闭
           </Ionicons.Button>
         </View>
         <WebView

@@ -34,7 +34,7 @@ const SettingScreen = ({ navigation }: StackProps | TabProps): React.JSX.Element
             />
           </View>
         )}
-        <Text style={globalStyle.title}>Settings</Text>
+        <Text style={globalStyle.title}>设置</Text>
       </View>
       <ScrollView>
         {/* <Text>Hermes in use: {(global as any).HermesInternal ? 'true' : 'false'}</Text> */}
@@ -45,22 +45,22 @@ const SettingScreen = ({ navigation }: StackProps | TabProps): React.JSX.Element
         <Setting
           multiline
           maxLength={256}
-          name='Join message'
+          name='进服消息'
           value={settings.joinMessage}
           setValue={joinMessage => setSettings({ joinMessage })}
         />
         <Setting
-          name='Send join message'
+          name='自动发送进服消息'
           value={settings.sendJoinMessage}
           setValue={sendJoinMessage => setSettings({ sendJoinMessage })}
         />
         <Setting
-          name='Send /spawn command'
+          name='自动发送 /spawn 命令'
           value={settings.sendSpawnCommand}
           setValue={sendSpawnCommand => setSettings({ sendSpawnCommand })}
         />
         <Setting
-          name='Enable clicking web links'
+          name='允许点击聊天中的链接'
           value={settings.webLinks}
           setValue={webLinks => setSettings({ webLinks })}
         />
@@ -70,18 +70,18 @@ const SettingScreen = ({ navigation }: StackProps | TabProps): React.JSX.Element
           setValue={linkPrompt => setSettings({ linkPrompt })}
         /> */}
         <Setting
-          name='Enable 1.19 chat signing'
+          name='启用 1.19 聊天签名'
           value={settings.enableChatSigning}
           setValue={enableChatSigning => setSettings({ enableChatSigning })}
         />
         <Setting
-          name='Disable auto-correct in chat'
+          name='关闭聊天输入自动纠错'
           value={settings.disableAutoCorrect}
           setValue={disableAutoCorrect => setSettings({ disableAutoCorrect })}
         />
         {/* TODO: Text Font, Font Size, Chat Theme */}
         <Setting
-          name='Version'
+          name='版本'
           value={version}
           onClick={() => {
             const url = `https://github.com/retrixe/EnderChat/releases/${version}`
@@ -89,31 +89,31 @@ const SettingScreen = ({ navigation }: StackProps | TabProps): React.JSX.Element
           }}
         />
         <Setting
-          name='Feedback/Support'
-          value='Tap to open the GitHub Issues page, or join our Discord!'
+          name='反馈与支持'
+          value='点击打开 GitHub Issues 页面，或加入我们的 Discord！'
           onClick={() => {
             const url = 'https://github.com/retrixe/EnderChat/issues'
             Linking.openURL(url).catch(console.error)
           }}
         />
         <Setting
-          name='Discord Server'
-          value='Tap to open the Discord server invite.'
+          name='Discord 服务器'
+          value='点击打开 Discord 服务器邀请链接。'
           onClick={() => {
             const url = 'https://discord.gg/MFSJa9TpPS'
             Linking.openURL(url).catch(console.error)
           }}
         />
         <Setting
-          name='Sponsor my work, buy me a coffee!'
-          value='Tap to open my GitHub Sponsor page.'
+          name='赞助作者，请我喝杯咖啡！'
+          value='点击打开作者的 GitHub 赞助页面。'
           onClick={() => {
             const url = 'https://github.com/sponsors/retrixe'
             Linking.openURL(url).catch(console.error)
           }}
         />
         <Setting
-          name='License'
+          name='许可证'
           value='Mozilla Public License 2.0'
           onClick={() => {
             const url = 'https://www.mozilla.org/en-US/MPL/2.0/'
@@ -121,8 +121,8 @@ const SettingScreen = ({ navigation }: StackProps | TabProps): React.JSX.Element
           }}
         />
         <Setting
-          name='Privacy Policy'
-          value='Tap to open the privacy policy in your browser.'
+          name='隐私政策'
+          value='点击在浏览器中打开隐私政策。'
           onClick={() => {
             const url = 'https://github.com/retrixe/EnderChat#privacy-policy'
             Linking.openURL(url).catch(console.error)

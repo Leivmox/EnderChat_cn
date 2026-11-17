@@ -14,7 +14,7 @@ const DisconnectDialog = (): React.JSX.Element => {
   if (!disconnectReason) return <></>
   return (
     <Dialog visible onRequestClose={() => setDisconnectReason()}>
-      <Text style={dialogStyles.modalTitle}>Disconnected from {disconnectReason.server}</Text>
+      <Text style={dialogStyles.modalTitle}>已断开连接：{disconnectReason.server}</Text>
       <ChatToJsx
         chat={disconnectReason.reason}
         component={Text}
@@ -28,7 +28,7 @@ const DisconnectDialog = (): React.JSX.Element => {
           android_ripple={{ color: '#aaa' }}
           style={dialogStyles.modalButton}
         >
-          <Text style={dialogStyles.modalButtonText}>CLOSE</Text>
+          <Text style={dialogStyles.modalButtonText}>关闭</Text>
         </Pressable>
       </View>
     </Dialog>

@@ -51,7 +51,7 @@ const AddAccountDialog = ({
       // setPassRed(password === '')
       setUserRed(!newUser)
       if (accountExists) {
-        setDialogError('This account already exists! Delete it first.')
+        setDialogError('该账号已存在！请先删除它。')
       }
       return
     }
@@ -86,7 +86,7 @@ const AddAccountDialog = ({
           setDialogError(
             e instanceof Error
               ? e.message.replace('Invalid credentials. ', '')
-              : 'An unknown error occurred!',
+              : '发生未知错误！',
           )
         })
     }
@@ -96,26 +96,26 @@ const AddAccountDialog = ({
     <>
       {microsoftLogin && <MicrosoftLogin close={cancelAddAccount} />}
       <Dialog visible={open && !microsoftLogin} onRequestClose={cancelAddAccount}>
-        <Text style={dialogStyles.modalTitle}>Add Account</Text>
+        <Text style={dialogStyles.modalTitle}>添加账号</Text>
         <Pressable
           style={styles.microsoftButton}
           android_ripple={{ color: '#aaa' }}
           onPress={() => setMicrosoftLogin(true)}
         >
           <Image source={MicrosoftIcon} />
-          <Text style={styles.microsoftButtonText}>Login with Microsoft</Text>
+          <Text style={styles.microsoftButtonText}>使用微软账号登录</Text>
         </Pressable>
         <Text style={styles.discontinued}>
-          Note: Mojang Accounts are discontinued. Please migrate to Microsoft on PC to login.
+          注意：Mojang 账号已停止使用，请先在电脑上迁移为微软账号再登录。
         </Text>
         <View style={styles.divider} />
-        <Text style={styles.subheader}>Offline Mode (discouraged)</Text>
+        <Text style={styles.subheader}>离线模式（不推荐）</Text>
         <TextField
           red={userRed || invalidNewUser}
           value={newUser}
           onChangeText={setNewUser}
           keyboardType='email-address'
-          placeholder={'Username' + (password !== null ? '/E-mail' : '')}
+          placeholder={'用户名' + (password !== null ? '/邮箱' : '')}
         />
         {/* <Pressable
           style={styles.auth}
@@ -157,7 +157,7 @@ const AddAccountDialog = ({
                   : dialogStyles.modalButtonCancelText
               }
             >
-              CANCEL
+              取消
             </Text>
           </Pressable>
           <Pressable
@@ -165,7 +165,7 @@ const AddAccountDialog = ({
             android_ripple={{ color: '#aaa' }}
             style={dialogStyles.modalButton}
           >
-            <Text style={dialogStyles.modalButtonText}>ADD</Text>
+            <Text style={dialogStyles.modalButtonText}>添加</Text>
           </Pressable>
         </View>
       </Dialog>

@@ -55,7 +55,7 @@ const TextFieldDialog = ({
           <Text
             style={useDarkMode() ? styles.modalButtonCancelDarkText : styles.modalButtonCancelText}
           >
-            CANCEL
+            取消
           </Text>
         </Pressable>
         <Pressable
@@ -63,7 +63,7 @@ const TextFieldDialog = ({
           style={styles.modalButton}
           onPress={closeModalAndSaveState}
         >
-          <Text style={styles.modalButtonText}>DONE</Text>
+          <Text style={styles.modalButtonText}>确定</Text>
         </Pressable>
       </View>
     </Dialog>

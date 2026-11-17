@@ -159,22 +159,22 @@ export const getGameProfile = async (accessToken: string): Promise<GameProfile> 
     res.error === 'NOT_FOUND' &&
     res.errorMessage === 'The server has not found anything matching the request URI'
   ) {
-    throw new Error('This user does not own Minecraft!')
+    throw new Error('该用户没有购买 Minecraft！')
   } else if ('error' in res) throw new Error(`${res.error}: ${res.errorMessage}`)
   return res
 }
 
 export const XstsErrorCodes: Record<string, string> = {
-  2148916235: 'The account is from a country where Xbox Live is not available/banned.',
+  2148916235: '该账号所在的国家/地区无法使用 Xbox Live（已被封禁）。',
   2148916238:
-    'The account is a child (under 18) and cannot proceed unless the account is added to' +
-    ' a Family by an adult. This only seems to occur when using a custom Microsoft Azure' +
-    " application. When using the Minecraft launchers client id, this doesn't trigger.",
+    '该账号是儿童账号（未满 18 岁），必须由成年人将其加入家庭组后才能继续。' +
+    '这通常只在使用自建 Microsoft Azure 应用时出现；' +
+    '使用 Minecraft 启动器的客户端 ID 时不会触发。',
   2148916233:
-    "The account doesn't have an Xbox account. Once they sign up for one" +
-    ' (or login through minecraft.net to create one) then they can proceed with the login.' +
-    " This shouldn't happen with accounts that have purchased Minecraft with a Microsoft" +
-    " account, as they would've already gone through that Xbox signup process.",
+    '该账号还没有 Xbox 账号。注册 Xbox 账号后' +
+    '（或在 minecraft.net 登录以创建）即可继续登录。' +
+    '已经用微软账号购买过 Minecraft 的账号通常不会遇到这个问题，' +
+    '因为购买时已经走完了 Xbox 注册流程。',
 }
 
 interface XstsErrorInterface {
@@ -185,12 +185,12 @@ interface XstsErrorInterface {
 
 export class XstsError extends Error {
   Code = 401
-  XErrMessage = 'No details available.'
+  XErrMessage = '暂无详细信息。'
   XErr: keyof XstsError
   constructor(response: XstsErrorInterface) {
     super(response.Message)
     this.XErr = response.XErr
     this.Code = response.Code
-    this.XErrMessage = XstsErrorCodes[this.XErr] || 'No details available.'
+    this.XErrMessage = XstsErrorCodes[this.XErr] || '暂无详细信息。'
   }
 }

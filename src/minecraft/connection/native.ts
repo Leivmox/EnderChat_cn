@@ -155,7 +155,7 @@ export class NativeServerConnection extends events.EventEmitter implements Serve
           const { accessToken, selectedProfile } = options
           if (!accessToken || !selectedProfile) {
             this.disconnectReason = {
-              text: 'This server requires a premium account to be logged in!',
+              text: '该服务器要求使用正版账号登录！',
             }
             this.close()
             return

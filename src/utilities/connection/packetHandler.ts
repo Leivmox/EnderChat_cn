@@ -7,15 +7,15 @@ import { makeChatMessagePacket, parsePlayerChatMessage } from '../../minecraft/p
 import packetIds from '../../minecraft/packets/ids'
 
 export const enderChatPrefix = '\u00A74[\u00A7cEnderChat\u00A74] \u00A7c'
-export const parseMessageError = 'An error occurred when parsing chat.'
-export const unknownError = 'An unknown error occurred.'
-export const clientSettingsError = 'An error occurred when sending client settings.'
-export const inventoryCloseError = 'An error occurred when closing an inventory window.'
-export const respawnError = 'An error occurred when trying to respawn after death.'
-export const deathRespawnMessage = enderChatPrefix + 'You died! Respawning...'
-export const sendMessageError = 'Failed to send message to server!'
+export const parseMessageError = '解析聊天消息时发生错误。'
+export const unknownError = '发生未知错误。'
+export const clientSettingsError = '发送客户端设置时发生错误。'
+export const inventoryCloseError = '关闭物品栏窗口时发生错误。'
+export const respawnError = '死亡后复活时发生错误。'
+export const deathRespawnMessage = enderChatPrefix + '你死了！正在重生...'
+export const sendMessageError = '发送消息到服务器失败！'
 export const healthMessage =
-  enderChatPrefix + "You're losing health! \u00A7b%prev \u00A7f-> \u00A7c%new"
+  enderChatPrefix + '你正在掉血！\u00A7b%prev \u00A7f-> \u00A7c%new'
 
 type HandleError = (
   addMsg: (text: MinecraftChat) => void,
@@ -245,7 +245,7 @@ export const packetHandler =
         // Just keep `Logging In...`: packet.id === packetIds.CLIENTBOUND_LOGIN_SUCCESS(version)
         packet.id === packetIds.CLIENTBOUND_START_CONFIGURATION(version)
       ) {
-        setLoading('Reconfiguring...')
+        setLoading('正在重新配置...')
       } else if (packet.id === packetIds.CLIENTBOUND_ADD_RESOURCE_PACK_CONF(version)) {
         handleResourcePack(connection, packet, version).catch(handleError(addMessage, unknownError))
       } else if (packet.id === packetIds.CLIENTBOUND_KNOWN_PACKS(version)) {

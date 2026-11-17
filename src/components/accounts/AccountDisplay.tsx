@@ -34,12 +34,12 @@ const AccountDisplay = ({
         <Text style={styles.username}>{account.username}</Text>
         <Text style={darkMode ? styles.authTxtDark : styles.authTxt}>
           {account.type === 'mojang'
-            ? 'Mojang: ' + account.email
+            ? 'Mojang：' + account.email
             : account.type === 'microsoft'
-              ? 'Microsoft Account'
-              : 'Offline Mode'}
+              ? '微软账号'
+              : '离线模式'}
         </Text>
-        {account.active && <Text style={styles.active}>Active Account</Text>}
+        {account.active && <Text style={styles.active}>当前账号</Text>}
       </View>
     </Pressable>
   </ElevatedView>

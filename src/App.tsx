@@ -67,9 +67,9 @@ const HomeScreen = (): React.JSX.Element => {
         headerShown: false,
       })}
     >
-      <Tabs.Screen name='Servers' component={ServerScreen} />
-      <Tabs.Screen name='Accounts' component={AccountScreen} />
-      <Tabs.Screen name='Settings' component={SettingScreen} />
+      <Tabs.Screen name='Servers' component={ServerScreen} options={{ tabBarLabel: '服务器' }} />
+      <Tabs.Screen name='Accounts' component={AccountScreen} options={{ tabBarLabel: '账号' }} />
+      <Tabs.Screen name='Settings' component={SettingScreen} options={{ tabBarLabel: '设置' }} />
     </Tabs.Navigator>
   )
 }

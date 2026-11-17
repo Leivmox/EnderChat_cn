@@ -102,16 +102,16 @@ const ServerScreen = (props: Props): React.JSX.Element => {
     if (version < 754) {
       return setDisconnectReason({
         server: serverName,
-        reason: 'EnderChat only supports 1.16.4 and newer (for now).',
+        reason: 'EnderChat 目前仅支持 1.16.4 及更高版本。',
       })
     } else if (version > protocolMap.latest) {
       return setDisconnectReason({
         server: serverName,
         reason:
-          '§lThis version of EnderChat does not support the Minecraft version required by this server!\n\n' +
-          '§oPossible solutions:§r' +
-          '\n1. Make sure EnderChat is up to date.' +
-          '\n2. Try editing the server and setting the version manually.',
+          '§l当前版本的 EnderChat 不支持该服务器所需的 Minecraft 版本！\n\n' +
+          '§o可能的解决办法：§r' +
+          '\n1. 确认 EnderChat 已更新到最新版本。' +
+          '\n2. 尝试编辑该服务器并手动指定版本。',
       })
     }
     props.navigation.push('Chat', { serverName, version }) // getId prevents duplicate navigation.
@@ -135,7 +135,7 @@ const ServerScreen = (props: Props): React.JSX.Element => {
           onPress={() => setEditServerDialogOpen(true)}
           iconStyle={globalStyle.iconStyle}
         >
-          <Text style={globalStyle.iconButtonText}>Add</Text>
+          <Text style={globalStyle.iconButtonText}>添加</Text>
         </Ionicons.Button>
       </View>
       <ScrollView

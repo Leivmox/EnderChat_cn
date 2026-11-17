@@ -104,7 +104,7 @@ export const handleEncryptionRequest = (
     await callback(secret, concatPacketData(response))
   })().catch((e: unknown) => {
     console.error(e)
-    connection.disconnectReason = { text: 'Failed to authenticate with Mojang servers!' }
+    connection.disconnectReason = { text: '与 Mojang 服务器验证失败！' }
     connection.close()
   })
 }
