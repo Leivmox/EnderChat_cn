@@ -43,8 +43,11 @@ jobs:
         "$SDKMANAGER" "platform-tools" "platforms;android-35" "build-tools;35.0.0" \
           "ndk;27.1.12297006" "cmake;3.22.1"
 
+    # react-native-tcp is pinned to a tarball because Yarn's git fetcher fails
+    # on the runner ("invalid key: core.autocrlf"), so allow the lockfile to be
+    # refreshed instead of failing on --immutable.
     - name: Install Yarn dependencies
-      run: yarn install --immutable
+      run: yarn install --no-immutable
 
     # Configure Gradle for optimal use in GitHub Actions, including caching of downloaded dependencies.
     # See: https://github.com/gradle/actions/blob/main/setup-gradle/README.md
