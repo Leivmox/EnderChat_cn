@@ -25,7 +25,7 @@ export const getSession = async (
 ): Promise<Session | string> => {
   const activeAccount = Object.keys(accounts).find(e => accounts[e].active)
   if (!activeAccount) {
-    return 'No active account selected! Open the Accounts tab and add an account.'
+    return '没有选择当前账号！请到“账号”页添加一个账号。'
   }
   const uuid = accounts[activeAccount].type ? activeAccount : undefined
 
@@ -40,7 +40,7 @@ export const getSession = async (
       // Create a session with the latest access token.
       const account = accounts[activeAccount]
       if (!session && account.type === 'microsoft') {
-        setLoading('Reloading your Microsoft Account...')
+        setLoading('正在重新加载微软账号...')
         const [msAccessToken, msRefreshToken] = await refreshMSAuthToken(
           account.microsoftRefreshToken,
           config.clientId,
@@ -60,7 +60,7 @@ export const getSession = async (
           },
         })
       } else if (!session && account.type === 'mojang') {
-        setLoading('Reloading your Mojang Account...')
+        setLoading('正在重新加载 Mojang 账号...')
         const { accessToken, clientToken } = await refresh(
           account.accessToken,
           account.clientToken,
@@ -80,7 +80,7 @@ export const getSession = async (
       setSession(activeAccount, session)
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (e) {
-      return 'Failed to create session! You may need to re-login with your Microsoft Account in the Accounts tab.'
+      return '创建会话失败！你可能需要到“账号”页重新登录微软账号。'
     }
   }
   return session
@@ -103,12 +103,12 @@ export const createConnection = async (
     ;[host, port] = await resolveHostname(hostname, portNumber)
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (e) {
-    return 'Failed to resolve server hostname!'
+    return '无法解析服务器地址！'
   }
 
   const activeAccount = Object.keys(accounts).find(e => accounts[e].active)
   if (!activeAccount) {
-    return 'No active account selected! Open the Accounts tab and add an account.'
+    return '没有选择当前账号！请到“账号”页添加一个账号。'
   }
   const uuid = accounts[activeAccount].type ? activeAccount : undefined
 
@@ -133,6 +133,6 @@ export const createConnection = async (
     return newConn
   } catch (e) {
     console.error(e)
-    return 'Failed to connect to server!'
+    return '连接服务器失败！'
   }
 }

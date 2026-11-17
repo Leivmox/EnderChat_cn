@@ -64,14 +64,14 @@ const DarkModeSetting = ({ value, setValue }: DarkModeSettingProps): React.JSX.E
   return (
     <Pressable onPress={() => setModalOpen(true)} android_ripple={ripple}>
       <Dialog visible={modalOpen} onRequestClose={() => setModalOpen(false)}>
-        <Text style={[dialogStyles.modalTitle, styles.dialogTitle]}>Dark mode</Text>
+        <Text style={[dialogStyles.modalTitle, styles.dialogTitle]}>深色模式</Text>
         <Pressable
           onPress={() => setValue(true)}
           android_ripple={ripple}
           style={styles.dialogOption}
         >
           <RadioButton selected={value === true} />
-          <Text style={styles.settingItem}>Enabled</Text>
+          <Text style={styles.settingItem}>开启</Text>
         </Pressable>
         <Pressable
           onPress={() => setValue(false)}
@@ -79,7 +79,7 @@ const DarkModeSetting = ({ value, setValue }: DarkModeSettingProps): React.JSX.E
           style={styles.dialogOption}
         >
           <RadioButton selected={value === false} />
-          <Text style={styles.settingItem}>Disabled</Text>
+          <Text style={styles.settingItem}>关闭</Text>
         </Pressable>
         <Pressable
           onPress={() => setValue(null)}
@@ -87,7 +87,7 @@ const DarkModeSetting = ({ value, setValue }: DarkModeSettingProps): React.JSX.E
           style={styles.dialogOption}
         >
           <RadioButton selected={value === null} />
-          <Text style={styles.settingItem}>Use system default</Text>
+          <Text style={styles.settingItem}>跟随系统</Text>
         </Pressable>
         <View style={dialogStyles.modalButtons}>
           <View style={globalStyle.flexSpacer} />
@@ -96,14 +96,14 @@ const DarkModeSetting = ({ value, setValue }: DarkModeSettingProps): React.JSX.E
             style={dialogStyles.modalButton}
             onPress={() => setModalOpen(false)}
           >
-            <Text style={cancelStyle}>CLOSE</Text>
+            <Text style={cancelStyle}>关闭</Text>
           </Pressable>
         </View>
       </Dialog>
       <View style={styles.setting}>
-        <Text style={styles.settingText}>Dark mode</Text>
+        <Text style={styles.settingText}>深色模式</Text>
         <Text style={dark ? styles.settingSubtextDark : styles.settingSubtext}>
-          {value === null ? 'System default' : value ? 'Enabled' : 'Disabled'}
+          {value === null ? '跟随系统' : value ? '开启' : '关闭'}
         </Text>
       </View>
     </Pressable>

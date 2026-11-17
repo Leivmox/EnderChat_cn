@@ -61,7 +61,7 @@ const Setting = <T extends string | boolean>({
         <Text style={styles.settingText}>{name}</Text>
         {typeof value === 'string' && (
           <Text style={da ? styles.settingSubtextDark : styles.settingSubtext}>
-            {value || 'N/A'}
+            {value || '未设置'}
           </Text>
         )}
         {typeof toggleValue === 'boolean' && (

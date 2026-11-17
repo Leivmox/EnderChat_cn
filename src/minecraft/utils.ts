@@ -86,16 +86,26 @@ export const resolveHostname = async (
   port: number,
   retry = false, // Not intended to be set by user.
 ): Promise<[string, number]> => {
-  const req = await fetch(
-    retry
-      ? `https://dns.google/resolve?name=_minecraft._tcp.${hostname}&type=srv&do=1`
-      : `https://cloudflare-dns.com/dns-query?name=_minecraft._tcp.${hostname}&type=SRV`,
-    { headers: { accept: 'application/dns-json' } },
-  )
-  if (!req.ok && !retry) return await resolveHostname(hostname, port, true)
-  else if (!req.ok) throw new Error('Failed to make DNS query!')
-  const res = (await req.json()) as { Answer?: { type: number; data: string }[] }
-  const srvRecords = res.Answer?.filter(r => r.type === 33 && r.data)
+  // IP addresses don't need a SRV lookup.
+  if (/^\d{1,3}(\.\d{1,3}){3}$/.test(hostname)) return [hostname, port]
+  let srvRecords: { type: number; data: string }[] | undefined
+  try {
+    const req = await fetch(
+      retry
+        ? `https://dns.google/resolve?name=_minecraft._tcp.${hostname}&type=srv&do=1`
+        : `https://cloudflare-dns.com/dns-query?name=_minecraft._tcp.${hostname}&type=SRV`,
+      { headers: { accept: 'application/dns-json' } },
+    )
+    if (!req.ok) {
+      // Retry with the other DoH provider, then give up and use the system resolver.
+      return retry ? [hostname, port] : await resolveHostname(hostname, port, true)
+    }
+    const res = (await req.json()) as { Answer?: { type: number; data: string }[] }
+    srvRecords = res.Answer?.filter(r => r.type === 33 && r.data)
+  } catch {
+    // DoH is unreachable (blocked networks etc.) - fall back to the system resolver instead of failing.
+    return retry ? [hostname, port] : await resolveHostname(hostname, port, true)
+  }
   let result: [string, number] = [hostname, port]
   if (srvRecords?.length) {
     // TODO: Support SRV priority/weight, maybe?
@@ -103,7 +113,13 @@ export const resolveHostname = async (
     result = [record[3], +record[2]]
   }
   // Prefer system's hostname resolution unless special characters are present (breaks Android).
-  if (!/^[a-zA-Z0-9.-]+$/.test(result[0])) return [await resolveIP(result[0]), result[1]]
+  if (!/^[a-zA-Z0-9.-]+$/.test(result[0])) {
+    try {
+      return [await resolveIP(result[0]), result[1]]
+    } catch {
+      return [result[0], result[1]]
+    }
+  }
   return result
 }
 

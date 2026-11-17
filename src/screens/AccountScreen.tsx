@@ -55,19 +55,19 @@ const AccountScreen = (): React.JSX.Element => {
           style={styles.modalButton}
         >
           <Text style={styles.deleteAccountText}>
-            Delete '{deleteAccount && accounts[deleteAccount].username}' account
+            删除账号 "{deleteAccount && accounts[deleteAccount].username}"
           </Text>
         </Pressable>
       </Dialog>
       <View style={darkMode ? globalStyle.darkHeader : globalStyle.header}>
-        <Text style={globalStyle.title}>Accounts</Text>
+        <Text style={globalStyle.title}>账号</Text>
         <View style={globalStyle.flexSpacer} />
         <Ionicons.Button
           name='add'
           onPress={() => setAddAccountDialogOpen(true)}
           iconStyle={globalStyle.iconStyle}
         >
-          <Text style={globalStyle.iconButtonText}>Add</Text>
+          <Text style={globalStyle.iconButtonText}>添加</Text>
         </Ionicons.Button>
       </View>
       <View style={globalStyle.outerView}>

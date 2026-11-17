@@ -79,22 +79,22 @@ const EditServerDialog = ({
   return (
     <Dialog visible={!!editServerDialogOpen} onRequestClose={closeDialog}>
       <Text style={dialogStyles.modalTitle}>
-        {typeof editServerDialogOpen === 'string' ? 'Edit' : 'Add'} Server
+        {typeof editServerDialogOpen === 'string' ? '编辑服务器' : '添加服务器'}
       </Text>
       <TextField
         red={serverNameRed || invalidServerName}
         value={newServerName}
         onChangeText={setNewServerName}
-        placeholder='Server Name'
+        placeholder='服务器名称'
       />
-      <TextField red={ipAddrRed} value={ipAddr} onChangeText={setIpAddr} placeholder='IP Address' />
+      <TextField red={ipAddrRed} value={ipAddr} onChangeText={setIpAddr} placeholder='IP 地址' />
       <Picker
         selectedValue={serverVersion}
         style={darkMode ? styles.addServerPickerDark : styles.addServerPicker}
         onValueChange={itemValue => setServerVersion(itemValue)}
         dropdownIconColor={darkMode ? '#ffffff' : '#000000'}
       >
-        <Picker.Item label='Auto' value='auto' />
+        <Picker.Item label='自动' value='auto' />
         <Picker.Item label='1.21.4 (WIP)' value='1.21.4' />
         <Picker.Item label='1.21.2/1.21.3 (WIP)' value='1.21.2' />
         <Picker.Item label='1.21/1.21.1 (WIP)' value='1.21' />
@@ -119,7 +119,7 @@ const EditServerDialog = ({
             android_ripple={{ color: '#aaa' }}
             style={dialogStyles.modalButton}
           >
-            <Text style={styles.deleteServerButtonText}>DELETE</Text>
+            <Text style={styles.deleteServerButtonText}>删除</Text>
           </Pressable>
         )}
         <View style={globalStyle.flexSpacer} />
@@ -128,7 +128,7 @@ const EditServerDialog = ({
           android_ripple={{ color: '#aaa' }}
           style={dialogStyles.modalButton}
         >
-          <Text style={modalButtonCancelText}>CANCEL</Text>
+          <Text style={modalButtonCancelText}>取消</Text>
         </Pressable>
         <Pressable
           onPress={handleEditServer}
@@ -136,7 +136,7 @@ const EditServerDialog = ({
           style={dialogStyles.modalButton}
         >
           <Text style={dialogStyles.modalButtonText}>
-            {typeof editServerDialogOpen === 'string' ? 'EDIT' : 'ADD'}
+            {typeof editServerDialogOpen === 'string' ? '保存' : '添加'}
           </Text>
         </Pressable>
       </View>

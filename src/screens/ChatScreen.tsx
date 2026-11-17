@@ -53,7 +53,7 @@ const ChatScreen = ({ navigation, route }: Props): React.JSX.Element => {
   const [, setCommandHistory] = useState<string[]>([])
   const [actionBar, setActionBar] = useState<MinecraftChat | null>(null)
   const [messages, setMessages] = useState<Message[]>([])
-  const [loading, setLoading] = useState('Connecting to server...')
+  const [loading, setLoading] = useState('正在连接服务器...')
   const [message, setMessage] = useState('')
 
   const performedInitialActionsRef = useRef(false)
@@ -127,7 +127,7 @@ const ChatScreen = ({ navigation, route }: Props): React.JSX.Element => {
         if (typeof session === 'string') {
           closeChatScreen({ server: serverName, reason: session })
         } else if (statusRef.current !== 'CLOSED') {
-          setLoading('Connecting to server...')
+          setLoading('正在连接服务器...')
           const conn = await createConnection(
             serverName,
             version,
@@ -142,7 +142,7 @@ const ChatScreen = ({ navigation, route }: Props): React.JSX.Element => {
             if (typeof conn === 'string') {
               closeChatScreen({ server: serverName, reason: conn })
             } else {
-              conn.on('connect', () => setLoading('Logging in...'))
+              conn.on('connect', () => setLoading('正在登录...'))
               setConnection(conn)
             }
           } else if (typeof conn !== 'string') conn.close()
@@ -151,7 +151,7 @@ const ChatScreen = ({ navigation, route }: Props): React.JSX.Element => {
         console.error(err)
         if (statusRef.current !== 'CLOSED') {
           const reason =
-            'An unknown error occurred!' + (err instanceof Error ? `\n${err.message}` : '')
+            '发生未知错误！' + (err instanceof Error ? `\n${err.message}` : '')
           closeChatScreen({ server: serverName, reason })
         }
       })
@@ -211,7 +211,7 @@ const ChatScreen = ({ navigation, route }: Props): React.JSX.Element => {
         settings.webLinks &&
         (ce.value.startsWith('https://') || ce.value.startsWith('http://'))
       ) {
-        Linking.openURL(ce.value).catch(() => addMessage(enderChatPrefix + 'Failed to open URL!'))
+        Linking.openURL(ce.value).catch(() => addMessage(enderChatPrefix + '无法打开链接！'))
       } else if (ce.action === 'copy_to_clipboard') {
         Clipboard.setString(ce.value)
       } else if (ce.action === 'run_command') {
@@ -240,7 +240,7 @@ const ChatScreen = ({ navigation, route }: Props): React.JSX.Element => {
             onPress={() => closeChatScreen()}
           />
         </View>
-        <Text style={[globalStyle.title, styles.title]}>Chat - {title}</Text>
+        <Text style={[globalStyle.title, styles.title]}>聊天 - {title}</Text>
         <View style={globalStyle.flexSpacer} />
         <Ionicons.Button
           name='settings-outline'
@@ -258,7 +258,7 @@ const ChatScreen = ({ navigation, route }: Props): React.JSX.Element => {
               default: 'large',
             })}
           />
-          <Text style={styles.loadingScreenText}>{loading || 'Connecting to server...'}</Text>
+          <Text style={styles.loadingScreenText}>{loading || '正在连接服务器...'}</Text>
         </View>
       )}
       {!loading && connection && (
@@ -278,7 +278,7 @@ const ChatScreen = ({ navigation, route }: Props): React.JSX.Element => {
           <View style={darkMode ? styles.textAreaDark : styles.textArea}>
             {/* eslint-disable @typescript-eslint/no-deprecated -- Found nothing in the docs */}
             <TextField
-              placeholder='Message'
+              placeholder='发送消息'
               value={message}
               maxLength={charLimit}
               onChangeText={setMessage}
