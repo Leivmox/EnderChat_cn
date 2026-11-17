@@ -2,7 +2,7 @@ name: Build CI for Android
 
 on:
   push:
-    branches: [ "main", "zh-cn" ]
+    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
